@@ -1,0 +1,14 @@
+name: leaderboards
+version: 1.0.0
+main: dev.shayrk.leaderboards.program.Main
+author: shayrk
+depend:
+  - DecentHolograms
+commands:
+  leaderboard:
+    description: "Leaderboard command"
+    usage: "/leaderboard [argument] | [arguments..]"
+    aliases:
+      - "lbs"
+      - "leaderboards"
+      - "lb"

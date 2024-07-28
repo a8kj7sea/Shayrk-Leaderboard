@@ -1,0 +1,42 @@
+# Note :
+# permission: "leaderboards-plugin.admin" to use sub commands
+# please reload plugin or server after create leaderboards (only for first time)
+
+leaderboards-settings:
+  update-interval: 6 # in hours
+  storage-type:
+    type: 'yaml' # current time no choices just yaml
+  body-format: "&8#&b%count% &2%user% &8> &c%data-amount%"
+  limit: 10
+
+
+database:
+  mysql:
+    host: 'localhost'
+    username: 'root'
+    password: 'easypass'
+    database: 'players_data'
+    port: 3306
+
+
+leaderboards:
+  #- "leaderboard-id"
+
+
+# Please don't modify leaderboard id !
+# simple placeholders 
+# %type% to return type of leaderboards
+# %time% to return last update time
+# %limit% to return limit of top users
+# you can use it only is header and footer
+# have a good day !
+leaderboards-data:
+  #id:
+  #  type: ""
+  #  header: ""
+  #  footer: "" 
+  #  location: 
+  #    world: ""
+  #    x: -1
+  #    y: -1
+  #    z: -1
