@@ -2,6 +2,7 @@ package dev.shayrk.leaderboards.tasks;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import org.bukkit.scheduler.BukkitRunnable;
 
@@ -65,15 +66,17 @@ public class UpdateLeaderboardsTask extends BukkitRunnable {
                             .replace("%limit%", "" + limit)
                             .replace("time", formattedDate));
 
+            String bodyFormat = "";
+            AtomicInteger userPos = new AtomicInteger(1);
+
             for (TopUser topUser : plugin.getDatabaseManager().getTopUsers(limit,
                     PlayerDataType.valueOf(type.toUpperCase()))) {
                 String name = topUser.getName();
-                int userpos = topUser.getPos();
                 int amount = topUser.getDataAmount();
 
-                String bodyFormat = configuration.getConfigurationFile().getString("leaderboards-settings.body-format")
+                bodyFormat = configuration.getConfigurationFile().getString("leaderboards-settings.body-format")
                         .replace("%user%", name)
-                        .replace("%count%", "" + userpos)
+                        .replace("%count%", "" + userPos.getAndIncrement())
                         .replace("%data-amount%", "" + amount);
 
                 DHAPI.addHologramLine(hologram, format(bodyFormat));
