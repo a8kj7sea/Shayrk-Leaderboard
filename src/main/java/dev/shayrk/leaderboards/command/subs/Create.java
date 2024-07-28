@@ -2,6 +2,8 @@ package dev.shayrk.leaderboards.command.subs;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.concurrent.atomic.AtomicInteger;
+
 import org.bukkit.entity.Player;
 
 import dev.shayrk.leaderboards.config.Configuration;
@@ -95,18 +97,19 @@ public class Create extends SubCommand {
 
         DHAPI.addHologramLine(hologram,
                 header.replace("%type%", type).replace("%limit%", "" + limit));
-
+        String bodyFormat = "";
+        AtomicInteger userPos = new AtomicInteger(1);
         for (TopUser topUser : databaseManager.getTopUsers(limit, PlayerDataType.valueOf(type.toUpperCase()))) {
             String name = topUser.getName();
-            int userpos = topUser.getPos();
             int amount = topUser.getDataAmount();
 
-            String bodyFormat = configuration.getConfigurationFile().getString("leaderboards-settings.body-format")
+            bodyFormat = configuration.getConfigurationFile().getString("leaderboards-settings.body-format")
                     .replace("%user%", name)
-                    .replace("%count%", "" + userpos)
+                    .replace("%count%", "" + userPos.getAndIncrement())
                     .replace("%data-amount%", "" + amount);
 
             DHAPI.addHologramLine(hologram, format(bodyFormat));
+
         }
 
         DHAPI.addHologramLine(hologram, footer.replace("time", formattedDate));
