@@ -68,7 +68,7 @@ public class List extends SubCommand {
                 : "Unknown";
 
         String message = String.format(
-                "&6Leaderboard Information\n" +
+                "\n\n&6Leaderboard Information\n\n" +
                         "&eType: &f%s\n" +
                         "&eID: &f%s\n" +
                         "&eLocation: &f%s",
